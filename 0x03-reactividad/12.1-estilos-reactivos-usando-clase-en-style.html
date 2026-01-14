@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app">{{ text }}</div>
+    <script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    text: "Puerta Cerrada",
+                    isOpen: false,
+                }
+            },
+            watch: {
+                isOpen(value) {
+                    if (value) {
+                        this.text = "Puerta ABIERTA";
+                    } else {
+                        this.text = "Puerta Cerrada"
+                    }
+                }
+            },
+            computed: {
+                label() {
+                    return this.isOpen ? "Cerrar" : "Abrir"
+                },
+                myStyles() {
+                    return this.isOpen ? ['openStyle'] : ['closedStyle']
+                }
+            },
+            template: `
+        <div class="container" :class="myStyles">
+            <h2>{{ text }}</h2>
+            <button @click="isOpen = !isOpen">{{ label }}</button>
+        </div>
+        `
+        }).mount("#app");
+    </script>
+
+    <style>
+        html,
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #app,
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            margin-top: 24px;
+            border: none;
+            background-color: white;
+            padding: 8px 24px;
+            border-radius: 12px;
+        }
+
+        .closedStyle {
+            background-color: #eca1a6;
+        }
+
+        .openStyle {
+            background-color: #b5e7a0;
+        }
+    </style>
+
+</body>
+
+</html>
