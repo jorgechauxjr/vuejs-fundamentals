@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app">{{ text }}</div>
+    <script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    evt: "submit",
+                    counter: 0
+                };
+            },
+            methods: {
+                mysubmit() {
+                    // console.log(event);
+                    // event.preventDefault();
+                    this.counter++;
+                }
+            },
+            template: `<form v-on:[evt].prevent="mysubmit"><button>{{ counter }}</button></form>`
+            // template: `<form v-on:submit.prevent.stop="mysubmit"><button>{{ counter }}</button></form>`
+        }).mount("#app");
+        console.log(vm)
+    </script>
+
+</body>
+
+</html>
